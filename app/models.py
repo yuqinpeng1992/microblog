@@ -4,16 +4,21 @@ class User(db.Model):
     nickname = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(20), index=True, unique=True)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+
     def is_authenticated(self):
         return True
+
     def is_activated(self):
         return True
+
     def is_anonymous(self):
         return True
+
     def getid(self):
         try:
             return unicode(self.id)
         except NameError:
+
             return str(self.id)
     def __repr__(self):
         return '<User %r>' %(self.nickname)
